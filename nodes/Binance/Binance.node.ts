@@ -1,12 +1,6 @@
-// @ts-nocheck
 import { IExecuteFunctions } from 'n8n-core';
 import { IDataObject, INodeExecutionData, INodeType, INodeTypeDescription } from 'n8n-workflow';
-import axios from 'axios';
-import { ethers } from 'ethers';
 const { Spot } = require('@binance/connector');
-import {
-	LoggerProxy as Logger
-} from 'n8n-workflow';
 
 async function trade(
 	symbol: string,
@@ -24,7 +18,7 @@ async function trade(
 		const result = await client.newOrder(symbol, side, type, {
 			timeInForce: timeInForce,
 			quantity: quantity,
-			price: price
+			price: price,
 		});
 		return result;
 	} catch (error) {
@@ -150,16 +144,15 @@ export class Binance implements INodeType {
 
 	// The execute method will go here
 	async execute(this: IExecuteFunctions): Promise<INodeExecutionData[][]> {
-		const apiKey = (await this.getCredentials('binanceApi')).binanceApiKey;
-		const secretKey = (await this.getCredentials('binanceApi')).binanceSecretKey;
+		const apiKey: string = (await this.getCredentials('binanceApi')).binanceApiKey as string;
+		const secretKey: string = (await this.getCredentials('binanceApi')).binanceSecretKey as string;
 		// Handle data coming from previous nodes
 		const items = this.getInputData();
-		let responseData;
 		const returnData = [];
 		for (let i = 0; i < items.length; i++) {
 			// Get additional fields input
 			const data: IDataObject = {
-				symbol: this.getNodeParameter('symbol', i) as string,
+				symbol: (this.getNodeParameter('symbol', i) as string).toUpperCase(),
 				side: this.getNodeParameter('side', i) as string,
 				type: this.getNodeParameter('type', i) as string,
 				timeInForce: this.getNodeParameter('timeInForce', i) as string,
@@ -168,21 +161,20 @@ export class Binance implements INodeType {
 			};
 			Object.assign(data);
 			let orderResult = await trade(
-				data.symbol,
-				data.side,
-				data.type,
-				data.timeInForce,
-				data.quantity,
-				data.price,
+				data.symbol as string,
+				data.side as string,
+				data.type as string,
+				data.timeInForce as string,
+				data.quantity as number,
+				data.price as number,
 				apiKey,
 				secretKey,
 			);
 			returnData.push({
 				json: orderResult,
 			});
-
-			// Map data to n8n data structure
-			return [this.helpers.returnJsonArray(returnData)];
 		}
+		// Map data to n8n data structure
+		return [this.helpers.returnJsonArray(returnData)];
 	}
 }
