@@ -23,7 +23,7 @@
 		"lint": "eslint nodes credentials package.json",
 		"lintfix": "eslint nodes credentials package.json --fix",
 		"prepublishOnly": "npm run build && npm run lint -c .eslintrc.prepublish.js nodes credentials package.json",
-		"test": "npm run build;npm link;cd ~/.n8n/nodes/;npm link n8n-nodes-binance;n8n start"
+		"test": "npm run build;npm link;cd ~/.n8n/nodes/;npm link n8n-nodes-binance;export N8N_LOG_LEVEL=info;n8n start"
 	},
 	"files": [
 		"dist"

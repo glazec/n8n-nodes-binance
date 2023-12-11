@@ -4,6 +4,9 @@ import { IDataObject, INodeExecutionData, INodeType, INodeTypeDescription } from
 import axios from 'axios';
 import { ethers } from 'ethers';
 const { Spot } = require('@binance/connector');
+import {
+	LoggerProxy as Logger
+} from 'n8n-workflow';
 
 async function trade(
 	symbol: string,
@@ -17,13 +20,16 @@ async function trade(
 ): Promise<any> {
 	const client = new Spot(apiKey, apiSecret);
 	client.newOrder;
-	const result = await client.newOrder(symbol, side, type, {
-		timeInForce: timeInForce,
-		quantity: quantity,
-		price: price,
-		baseURL: 'https://testnet.binance.vision',
-	});
-	return result.data;
+	try {
+		const result = await client.newOrder(symbol, side, type, {
+			timeInForce: timeInForce,
+			quantity: quantity,
+			price: price
+		});
+		return result;
+	} catch (error) {
+		return error;
+	}
 }
 
 export class Binance implements INodeType {
@@ -46,68 +52,6 @@ export class Binance implements INodeType {
 			},
 		],
 		properties: [
-			// {
-			// 	displayName: 'Chain',
-			// 	name: 'chainId',
-			// 	type: 'options',
-			// 	options: [
-			// 		{ name: 'Ethereum', value: 1 },
-			// 		{ name: 'Binance Smart Chain', value: 56 },
-			// 		{ name: 'Polygon', value: 137 },
-			// 		{ name: 'Optimism', value: 10 },
-			// 		{ name: 'Arbitrum', value: 42161 },
-			// 		{ name: 'Gnosis Chain', value: 100 },
-			// 		{ name: 'Avalanche', value: 43114 },
-			// 		{ name: 'Fantom', value: 250 },
-			// 		{ name: 'Klaytn', value: 8217 },
-			// 		{ name: 'Aurora', value: 1313161554 },
-			// 	],
-			// 	default: 1,
-			// 	required: true,
-			// 	description: 'The ID of the chain to send transactions to',
-			// },
-			// {
-			// 	displayName: 'RPC Address',
-			// 	name: 'rpcAddress',
-			// 	type: 'string',
-			// 	default: 'https://arbitrum-mainnet.infura.io/v3/6f00d07c00804205a7dae7f8d4f75fcc',
-			// 	required: true,
-			// 	description: 'The RPC address to send transactions to',
-			// },
-			// {
-			// 	// USDT Address on Arbitrum
-			// 	displayName: 'Input Token Address',
-			// 	name: 'inputTokenAddress',
-			// 	type: 'string',
-			// 	default: '0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9',
-			// 	required: true,
-			// 	description: 'The address of the token to send transactions to',
-			// },
-			// {
-			// 	// DAI Address on Arbitrum
-			// 	displayName: 'Output Token Address',
-			// 	name: 'outputTokenAddress',
-			// 	type: 'string',
-			// 	default: '0xDA10009cBd5D07dd0CeCc66161FC93D7c9000da1',
-			// 	required: true,
-			// 	description: 'Whether to output the token address as a string',
-			// },
-			// {
-			// 	displayName: 'Input Token Amount',
-			// 	name: 'inputTokenAmount',
-			// 	type: 'number',
-			// 	default: 100,
-			// 	required: true,
-			// 	description: 'The amount of input token to send. Notice the decimals.',
-			// },
-			// {
-			// 	displayName: 'Slippage',
-			// 	name: 'slippage',
-			// 	type: 'number',
-			// 	default: 1,
-			// 	required: true,
-			// 	description: 'Min: 0; max: 50',
-			// },
 			{
 				displayName: 'Token Trading Pair',
 				name: 'symbol',
@@ -233,7 +177,6 @@ export class Binance implements INodeType {
 				apiKey,
 				secretKey,
 			);
-			print(orderResult);
 			returnData.push({
 				json: orderResult,
 			});
