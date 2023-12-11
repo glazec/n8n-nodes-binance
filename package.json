@@ -1,7 +1,7 @@
 {
 	"name": "n8n-nodes-binance",
-	"version": "0.1.1",
-	"description": "n8n node to swap tokens with 1inch",
+	"version": "0.1",
+	"description": "n8n node to trade on Binance",
 	"keywords": [
 		"n8n-community-node-package"
 	],
@@ -51,9 +51,7 @@
 	"dependencies": {
 		"@binance/connector": "^3.0.0",
 		"@types/request": "^2.48.8",
-		"ethers": "^6.2.2",
 		"node-fetch": "^3.3.1",
-		"request": "^2.88.2",
-		"viem": "^0.1.22"
+		"request": "^2.88.2"
 	}
 }
