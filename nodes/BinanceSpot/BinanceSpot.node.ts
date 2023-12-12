@@ -154,9 +154,12 @@ export class BinanceSpot implements INodeType {
 		// Handle data coming from previous nodes
 		const items = this.getInputData();
 		const returnData = [];
+		var data = null
 		for (let i = 0; i < items.length; i++) {
 			// Get additional fields input
-			const data: IDataObject = {
+			if (this.getNodeParameter('type', i) = "LIMIT")
+			{
+			data: IDataObject = {
 				symbol: (this.getNodeParameter('symbol', i) as string).toUpperCase(),
 				side: this.getNodeParameter('side', i) as string,
 				type: this.getNodeParameter('type', i) as string,
@@ -164,6 +167,16 @@ export class BinanceSpot implements INodeType {
 				quantity: this.getNodeParameter('quantity', i) as number,
 				price: this.getNodeParameter('price', i) as number,
 			};
+			if (this.getNodeParameter('type', i) = "MARKET")
+			{
+						data: IDataObject = {
+				symbol: (this.getNodeParameter('symbol', i) as string).toUpperCase(),
+				side: this.getNodeParameter('side', i) as string,
+				type: this.getNodeParameter('type', i) as string,
+				quantity: this.getNodeParameter('quantity', i) as number,
+			};
+			}
+			}	
 			Object.assign(data);
 			let orderResult = await trade(
 				data.symbol as string,
