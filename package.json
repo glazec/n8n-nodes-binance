@@ -1,5 +1,5 @@
 {
-	"name": "n8n-nodes-binance-spot",
+	"name": "n8n-nodes-binancespot",
 	"version": "0.1.1",
 	"description": "n8n node to trade on Binance",
 	"keywords": [
@@ -13,7 +13,7 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+<your-repo-url>"
+		"url": "https://github.com/glazec/n8n-nodes-binance"
 	},
 	"main": "index.js",
 	"scripts": {
@@ -23,7 +23,7 @@
 		"lint": "eslint nodes credentials package.json",
 		"lintfix": "eslint nodes credentials package.json --fix",
 		"prepublishOnly": "npm run build && npm run lint -c .eslintrc.prepublish.js nodes credentials package.json",
-		"test": "npm run build;npm link;cd ~/.n8n/nodes/;npm link n8n-nodes-binance-spot;export N8N_LOG_LEVEL=info;n8n start"
+		"test": "npm run build;npm link;cd ~/.n8n/nodes/;npm link n8n-nodes-binancespot;export N8N_LOG_LEVEL=info;n8n start"
 	},
 	"files": [
 		"dist"
@@ -34,7 +34,7 @@
 			"dist/credentials/BinanceApi.credentials.js"
 		],
 		"nodes": [
-			"dist/nodes/Binance/Binance.node.js"
+			"dist/nodes/BinanceSpot/BinanceSpot.node.js"
 		]
 	},
 	"devDependencies": {

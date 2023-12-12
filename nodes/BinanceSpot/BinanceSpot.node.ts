@@ -1,5 +1,10 @@
-import { IExecuteFunctions } from 'n8n-core';
-import { IDataObject, INodeExecutionData, INodeType, INodeTypeDescription } from 'n8n-workflow';
+import {
+	IExecuteFunctions,
+	IDataObject,
+	INodeExecutionData,
+	INodeType,
+	INodeTypeDescription,
+} from 'n8n-workflow';
 const { Spot } = require('@binance/connector');
 
 async function trade(
@@ -26,16 +31,16 @@ async function trade(
 	}
 }
 
-export class Binance implements INodeType {
+export class BinanceSpot implements INodeType {
 	description: INodeTypeDescription = {
-		displayName: 'Binance',
-		name: 'Binance',
+		displayName: 'Binance Spot',
+		name: 'binanceSpot',
 		icon: 'file:BinanceLogo.svg',
 		group: ['transform'],
 		version: 1,
 		description: 'Trade on Binance',
 		defaults: {
-			name: 'Binance',
+			name: 'BinanceSpot',
 		},
 		inputs: ['main'],
 		outputs: ['main'],
