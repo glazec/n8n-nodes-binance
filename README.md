@@ -16,6 +16,7 @@ Incorporate this node into your workflow with caution, considering these crucial
 
 - The Binance API does not permit calls from IP addresses in the US and other restricted countries.
 - Your order price must align with the current order book. For instance, placing a $10 buy order for a token trading at $70 is not feasible.
+- Decimal pecisions for quantity and price
 
 This Binance plugin empowers you to construct a personalized trading bot. An example use case involves integrating the [Telegram node](https://docs.n8n.io/nodes/n8n-nodes-base.telegram/) to receive price alerts, followed by executing orders through the Binance node.
 

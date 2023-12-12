@@ -31,16 +31,16 @@ async function trade(
 	}
 }
 
-export class BinanceSpot implements INodeType {
+export class BinanceSpotTrade implements INodeType {
 	description: INodeTypeDescription = {
-		displayName: 'Binance Spot',
-		name: 'binanceSpot',
+		displayName: 'Binance Spot Trade',
+		name: 'binanceSpotTrade',
 		icon: 'file:BinanceLogo.svg',
 		group: ['transform'],
 		version: 1,
-		description: 'Trade on Binance',
+		description: 'Trade spot on Binance',
 		defaults: {
-			name: 'BinanceSpot',
+			name: 'BinanceSpotTrade',
 		},
 		inputs: ['main'],
 		outputs: ['main'],
