@@ -1,11 +1,11 @@
-[![npm version](https://badge.fury.io/js/n8n-nodes-binance-spot.svg)](https://badge.fury.io/js/n8n-nodes-binance-spot)
+[![npm version](https://badge.fury.io/js/n8n-nodes-binancespottrade.svg)](https://badge.fury.io/js/n8n-nodes-binancespottrade)
 ![Banner image](https://user-images.githubusercontent.com/10284570/173569848-c624317f-42b1-45a6-ab09-f0ea3c247648.png)
 
-# n8n-nodes-binance-spot
+# n8n-nodes-binancespottrade
 
 ![](assets/example1.png)
 
-The `n8n-nodes-binance-spot` enhances your trading experience on Binance by automating spot trading activities. Utilize your Binance API key to access a variety of functions such as:
+The `n8n-nodes-binancespottrade` enhances your trading experience on Binance by automating spot trading activities. Utilize your Binance API key to access a variety of functions such as:
 
 - Market Orders
 - Limit Orders
@@ -25,6 +25,6 @@ Furthermore, the plugin supports advanced strategies like TWAP (Time Weighted Av
 
 # Install
 
-You can install the community package on the n8n Web GUI, Settings -> Community nodes -> Install a community node, type "n8n-nodes-binance-spot" in the input box.
+You can install the community package on the n8n Web GUI, Settings -> Community nodes -> Install a community node, type "n8n-nodes-binancespottrade" in the input box.
 
 You can find deailted installation guide at [n8n website](https://docs.n8n.io/integrations/community-nodes/installation/#install-a-community-node).
